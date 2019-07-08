@@ -61,6 +61,12 @@ public class Path : MonoBehaviour
         redirectedPath = mainList;
     }
 
+    public void AddDefaultPoint()
+    {
+        Instantiate(new GameObject(), this.transform);
+        CreatePath();
+    }
+
     public Vector3 GetPosition(int _value)
     {
         if(redirectedPath == null)
@@ -68,6 +74,15 @@ public class Path : MonoBehaviour
             CreatePath();
         }
         return redirectedPath[_value].position;
+    }
+
+    public Transform GetTransform(int _value)
+    {
+        if (redirectedPath == null)
+        {
+            CreatePath();
+        }
+        return redirectedPath[_value];
     }
 
     public int Length()

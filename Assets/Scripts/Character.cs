@@ -27,6 +27,10 @@ public class Character : MonoBehaviour
         float distance = Vector3.Distance(path.GetPosition(currentPointID), transform.position);
         transform.position = Vector3.MoveTowards(transform.position, path.GetPosition(currentPointID), Time.deltaTime * movementSpeed);
 
+        var rotation = Quaternion.LookRotation(path.GetPosition(currentPointID) - this.transform.position) * Quaternion.Euler(0, -90, 0);
+        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * rotationSpeed);
+
+
         if(distance <= 1)
         {
             currentPointID++;
@@ -35,6 +39,9 @@ public class Character : MonoBehaviour
         if(currentPointID >= path.Length())
         {
             _moveEnabled = false;
+
+            //TEMP, WILL CRASH PLAYERS HP
+            Destroy(this.gameObject);
         }
     }
 }

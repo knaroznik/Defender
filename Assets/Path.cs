@@ -63,7 +63,8 @@ public class Path : MonoBehaviour
 
     public void AddDefaultPoint()
     {
-        Instantiate(new GameObject(), this.transform);
+        GameObject x = new GameObject();
+        x.transform.parent = this.transform;
         CreatePath();
     }
 

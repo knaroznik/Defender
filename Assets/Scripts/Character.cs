@@ -5,8 +5,11 @@ using UnityEngine;
 public class Character : MonoBehaviour
 {
     public Path path;
+    public int Damage;
     public float movementSpeed;
     public float rotationSpeed;
+
+    public ObjectType characterType;
 
     private int currentPointID = 0;
 
@@ -40,7 +43,7 @@ public class Character : MonoBehaviour
         {
             _moveEnabled = false;
 
-            //TEMP, WILL CRASH PLAYERS HP
+            path.playerHealth.Damage(Damage);
             Destroy(this.gameObject);
         }
     }

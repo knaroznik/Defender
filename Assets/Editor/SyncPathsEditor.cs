@@ -17,5 +17,10 @@ public class SyncPathsEditor : Editor
             SceneView.RepaintAll();
         }
 
+        if(GUILayout.Button("Assign PlayerHealth"))
+        {
+            paths.SyncPlayerHealth();
+        }
+
     }
 }

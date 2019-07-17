@@ -8,6 +8,9 @@ public class SpawnController : MonoBehaviour
     public List<Spawner> spawners;
     private float nextSpawnTime;
 
+    int characterSpawned = 0;
+    int characterDamage = 1;
+
     private void Start()
     {
         nextSpawnTime = Random.Range(0, 4);
@@ -18,7 +21,14 @@ public class SpawnController : MonoBehaviour
         if(nextSpawnTime <= 0)
         {
             RandomSpawn();
-            nextSpawnTime = Random.Range(0, 4);
+            nextSpawnTime = Random.Range(0.4f, 4f);
+
+            characterSpawned++;
+            if(characterSpawned > 4 * characterDamage)
+            {
+                characterSpawned = 0;
+                characterDamage++;
+            }
         }
 
         nextSpawnTime -= Time.deltaTime;
@@ -28,6 +38,7 @@ public class SpawnController : MonoBehaviour
     {
         GameObject randomPrefab = prefabs[Random.Range(0, prefabs.Count)];
         Spawner randomSpawner = spawners[Random.Range(0, spawners.Count)];
-        randomSpawner.Spawn(randomPrefab);
+        randomSpawner.Spawn(randomPrefab, characterDamage);
+        
     }
 }

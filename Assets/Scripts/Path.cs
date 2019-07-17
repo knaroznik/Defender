@@ -6,6 +6,7 @@ using UnityEngine;
 public class Path : MonoBehaviour
 {
     public Color pathColor = Color.white;
+    public TowerHealth playerHealth;
 
     [HideInInspector]
     public bool _drawGizmos = false;

@@ -6,6 +6,7 @@ public class SyncPaths : MonoBehaviour
 {
 
     public List<Path> scenePaths;
+    public TowerHealth playerHealth;
 
     public void SynchronizePaths()
     {
@@ -15,6 +16,14 @@ public class SyncPaths : MonoBehaviour
             if (scenePaths[i] == p) continue;
 
             SyncPath(p, scenePaths[i]);
+        }
+    }
+
+    public void SyncPlayerHealth()
+    {
+        for (int i = 0; i < scenePaths.Count; i++)
+        {
+            scenePaths[i].playerHealth = playerHealth;
         }
     }
 

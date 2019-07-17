@@ -5,6 +5,12 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public float speed;
+    public BulletBase bulletType;
+
+    private void Start()
+    {
+        this.gameObject.GetComponent<Renderer>().material.color = bulletType.GetColor();
+    }
 
     // Update is called once per frame
     void Update()
@@ -18,8 +24,11 @@ public class Bullet : MonoBehaviour
     {
         if(other.tag == "Character")
         {
-            //CHECK SHAPE TODO
-            Destroy(other.gameObject);
+            ObjectType t = other.GetComponent<Character>().characterType;
+            if(t == bulletType.GetBulletType())
+            {
+                Destroy(other.gameObject);
+            }
             Destroy(this.gameObject);
         }
     }

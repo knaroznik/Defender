@@ -11,4 +11,11 @@ public class TowerUI : MonoBehaviour
     {
         healhtSlider.value = _value;
     }
+
+    public Text pointsText;
+
+    public void UpdatePoints(int _value)
+    {
+        pointsText.text = "Points : " + _value;
+    }
 }

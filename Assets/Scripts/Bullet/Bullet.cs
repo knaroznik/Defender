@@ -27,6 +27,7 @@ public class Bullet : MonoBehaviour
             ObjectType t = other.GetComponent<Character>().characterType;
             if(t == bulletType.GetBulletType())
             {
+                other.GetComponent<Character>().Die();
                 Destroy(other.gameObject);
             }
             Destroy(this.gameObject);

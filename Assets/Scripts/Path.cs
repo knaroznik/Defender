@@ -7,6 +7,7 @@ public class Path : MonoBehaviour
 {
     public Color pathColor = Color.white;
     public TowerHealth playerHealth;
+    public TowerPoints playerPoints;
 
     [HideInInspector]
     public bool _drawGizmos = false;

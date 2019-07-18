@@ -7,6 +7,7 @@ public class SyncPaths : MonoBehaviour
 
     public List<Path> scenePaths;
     public TowerHealth playerHealth;
+    public TowerPoints playerPoints;
 
     public void SynchronizePaths()
     {
@@ -19,11 +20,12 @@ public class SyncPaths : MonoBehaviour
         }
     }
 
-    public void SyncPlayerHealth()
+    public void SyncPlayerStats()
     {
         for (int i = 0; i < scenePaths.Count; i++)
         {
             scenePaths[i].playerHealth = playerHealth;
+            scenePaths[i].playerPoints = playerPoints;
         }
     }
 

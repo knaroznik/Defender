@@ -11,7 +11,7 @@ public class Tower : MonoBehaviour
     private float reloadTime = 0.4f;
     private float currentReloadTime = 0;
 
-    private BulletBase bulletType;
+    private BulletBase bulletType = new WhiteBullet();
 
     //MOVE TO ANOTHER CLASS
     public List<Text> texts;

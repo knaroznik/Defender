@@ -10,6 +10,7 @@ public class SpawnController : MonoBehaviour
 
     int characterSpawned = 0;
     int characterDamage = 1;
+    int characterPoints = 1;
 
     private void Start()
     {
@@ -28,6 +29,7 @@ public class SpawnController : MonoBehaviour
             {
                 characterSpawned = 0;
                 characterDamage++;
+                characterPoints++;
             }
         }
 
@@ -38,7 +40,7 @@ public class SpawnController : MonoBehaviour
     {
         GameObject randomPrefab = prefabs[Random.Range(0, prefabs.Count)];
         Spawner randomSpawner = spawners[Random.Range(0, spawners.Count)];
-        randomSpawner.Spawn(randomPrefab, characterDamage);
+        randomSpawner.Spawn(randomPrefab, characterDamage, characterPoints);
         
     }
 }

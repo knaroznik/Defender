@@ -6,6 +6,7 @@ public class Character : MonoBehaviour
 {
     public Path path;
     public int Damage;
+    public int Points;
     public float movementSpeed;
     public float rotationSpeed;
 
@@ -46,5 +47,10 @@ public class Character : MonoBehaviour
             path.playerHealth.Damage(Damage);
             Destroy(this.gameObject);
         }
+    }
+
+    public void Die()
+    {
+        path.playerPoints.AddPoints(Points);
     }
 }

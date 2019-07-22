@@ -33,6 +33,12 @@ public class TowerHealth : MonoBehaviour
 
     private void Death()
     {
-        Debug.Log("You died");
+        StartCoroutine(EDeath());
+    }
+
+    private IEnumerator EDeath()
+    {
+        yield return LoadingScreen.main.ChangeColor(Color.black);
+        PauzeMenu.main.DeathUIObject.SetActive(true);
     }
 }

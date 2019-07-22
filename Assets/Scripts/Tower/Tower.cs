@@ -19,6 +19,8 @@ public class Tower : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (PauzeMenu.main.pauzeOn) return;
+
         Rotate();
         Shoot();
 

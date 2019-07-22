@@ -12,13 +12,26 @@ public class SpawnController : MonoBehaviour
     int characterDamage = 1;
     int characterPoints = 1;
 
+    private bool screenFree = false;
+
     private void Start()
     {
         nextSpawnTime = Random.Range(0, 4);
+        LoadingScreen.main.ChangeColorInstantly(Color.black);
+        StartCoroutine(ClearScreen());
     }
-    // Update is called once per frame
+
+    private IEnumerator ClearScreen()
+    {
+        yield return StartCoroutine(LoadingScreen.main.ChangeColor(Color.clear));
+        screenFree = true;
+    }
+
+    // TODO : Different points and damage
     void Update()
     {
+        if (!screenFree) return;
+
         if(nextSpawnTime <= 0)
         {
             RandomSpawn();

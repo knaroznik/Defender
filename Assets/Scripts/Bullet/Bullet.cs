@@ -16,8 +16,6 @@ public class Bullet : MonoBehaviour
     void Update()
     {
         this.transform.position = Vector3.MoveTowards(this.transform.position, this.transform.position + this.transform.forward, Time.deltaTime * speed);
-
-        //TODO : if to far destroy
     }
 
     private void OnTriggerEnter(Collider other)
@@ -32,5 +30,10 @@ public class Bullet : MonoBehaviour
             }
             Destroy(this.gameObject);
         }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Destroy(this.gameObject);
     }
 }

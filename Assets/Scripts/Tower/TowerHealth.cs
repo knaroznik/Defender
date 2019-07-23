@@ -6,6 +6,8 @@ public class TowerHealth : MonoBehaviour
 {
     private int health = 100;
     private TowerUI uiHandler;
+    public GameObject floatingText;
+    public Transform canvas;
 
     private void Start()
     {
@@ -17,6 +19,7 @@ public class TowerHealth : MonoBehaviour
         if (Alive())
         {
             health -= _value;
+            ShowDamage(_value);
             if (health <= 0)
             {
                 health = 0;
@@ -24,6 +27,19 @@ public class TowerHealth : MonoBehaviour
             }
             uiHandler.UpdateHealth(health);
         }
+    }
+
+    public void ShowDamage(int _value)
+    {
+        GameObject instance = Instantiate(floatingText);
+        instance.transform.SetParent(canvas, false);
+        instance.transform.SetAsFirstSibling();
+        instance.GetComponent<FloatingText>().Start();
+        instance.GetComponent<FloatingText>().SetText(_value.ToString());
+
+        Vector2 screenPosition = Camera.main.WorldToScreenPoint(this.transform.position);
+        instance.transform.position = screenPosition;
+
     }
 
     public bool Alive()

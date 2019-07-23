@@ -29,7 +29,7 @@ public class Character : MonoBehaviour
         path = _path;
         Damage = _damage;
         Points = _points;
-        addspeed = _addSpeed;
+        addspeed = _addSpeed * 2;
     }
 
     // Update is called once per frame

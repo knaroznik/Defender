@@ -11,7 +11,7 @@ public class TowerPoints : MonoBehaviour
         uiHandler = GetComponent<TowerUI>();
     }
 
-    private int points = 0;
+    public int points = 0;
 
     public void AddPoints(int _value)
     {

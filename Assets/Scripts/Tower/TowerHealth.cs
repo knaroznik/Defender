@@ -49,6 +49,9 @@ public class TowerHealth : MonoBehaviour
 
     private void Death()
     {
+        PlaceData x = new PlaceData();
+        x.placePoints = GetComponent<TowerPoints>().points;
+        Leaderboard.main.TryInsert(x);
         StartCoroutine(EDeath());
     }
 

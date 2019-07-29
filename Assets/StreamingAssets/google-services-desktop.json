@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "466484817105",
+    "firebase_url": "https://leaderboard-1c8f0.firebaseio.com",
+    "project_id": "leaderboard-1c8f0",
+    "storage_bucket": "leaderboard-1c8f0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:466484817105:android:8c7db93f6083e9d7",
+        "android_client_info": {
+          "package_name": "com.Quoin.LeaderBoard"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "466484817105-fcnsdcnueghc63f31f4si7locfm645aq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGh_wHo6VVaXtAAalgMqIfeJy8cnMhzqw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "466484817105-fcnsdcnueghc63f31f4si7locfm645aq.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "466484817105-6plr8pd3hgld8osjfim3255gsjq3ieeh.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.Quoin.LeaderBoard"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

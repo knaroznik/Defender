@@ -11,9 +11,18 @@ public class LeaderboardMainMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        for(int i=0; i<3; i++)
+        StartCoroutine(EStart());
+    }
+
+    IEnumerator EStart()
+    {
+        while (!Leaderboard.main.InitComplete)
         {
-            texts[i].text = Leaderboard.main.ReadData(i+1).placePoints.ToString();
+            yield return new WaitForFixedUpdate();
+        }
+        for (int i = 0; i < 3; i++)
+        {
+            texts[i].text = Leaderboard.main.ReadData(i).placePoints.ToString();
         }
     }
 }

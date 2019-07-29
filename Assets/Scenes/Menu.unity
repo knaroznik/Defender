@@ -977,6 +977,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1823169944}
   - component: {fileID: 1823169945}
+  - component: {fileID: 1823169946}
   m_Layer: 0
   m_Name: '!DONTDESTROYONLOAD'
   m_TagString: Untagged
@@ -1010,6 +1011,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a60caa65a90ab6c4fb66eaf9acde9760, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  firebaseDatabase: {fileID: 1823169946}
+--- !u!114 &1823169946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1823169943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 988b073b1e6b3ca42a990e5225e23127, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DataBaseUrl: https://leaderboard-1c8f0.firebaseio.com/
 --- !u!1 &1823926552
 GameObject:
   m_ObjectHideFlags: 0

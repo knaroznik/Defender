@@ -6,6 +6,14 @@ public class Leaderboard : MonoBehaviour
 {
     public static Leaderboard main;
     private LeaderboardData data;
+    public FirebaseConnect firebaseDatabase;
+    public bool InitComplete
+    {
+        get
+        {
+            return data.initComplete;
+        }
+    }
 
     private void Awake()
     {
@@ -27,7 +35,7 @@ public class Leaderboard : MonoBehaviour
     {
         if(data == null)
         {
-            data = new LeaderboardData();
+            data = new LeaderboardData(firebaseDatabase);
             data.UpdateData();
         }
     }

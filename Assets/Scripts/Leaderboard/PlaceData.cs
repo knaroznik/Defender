@@ -5,7 +5,5 @@ using UnityEngine;
 
 public class PlaceData
 {
-    //TODO when going to GoogleDocs
-    //public DateTime placeDate;
     public int placePoints;
 }

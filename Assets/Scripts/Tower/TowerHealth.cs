@@ -14,6 +14,15 @@ public class TowerHealth : MonoBehaviour
         uiHandler = GetComponent<TowerUI>();
     }
 
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            health = 0;
+            Death();
+        }
+    }
+
     public void Damage(int _value)
     {
         if (Alive())

@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 public class LeaderboardData
 {
-    private PlaceData[] places;
-    private FirebaseConnect firebaseDatabase;
+    public PlaceData[] places;
+    private Database database;
     public bool initComplete;
 
-    public LeaderboardData(FirebaseConnect _firebaseDatabase)
+    public LeaderboardData(Database _firebaseDatabase)
     {
         places = new PlaceData[3];
         initComplete = false;
@@ -18,38 +18,35 @@ public class LeaderboardData
         {
             places[i] = new PlaceData();
         }
-        firebaseDatabase = _firebaseDatabase;
+        database = _firebaseDatabase;
     }
 
     public void UpdateData()
     {
         initComplete = false;
-        firebaseDatabase.ReadDataOnce(PlaceData);
+        database.ReadData(this);
     }
 
-    private void PlaceData(DataSnapshot data)
-    {
-        int i = 0;
-        foreach (DataSnapshot d in data.Children)
-        {
-            int x;
-            int.TryParse(d.Value.ToString(), out x);
-            places[i].placePoints = x;
-            i++;
-        }
-        initComplete = true;
-    }
-
-    //ROZBIĆ
     private async void WriteData(PlaceData _newData)
     {
-        
-        bool ready = await firebaseDatabase.DatabaseReady();
+        await DatabaseReady();
+        if (TryHighScore(_newData))
+        {
+            ServerWrite();
+        }
+    }
+
+    private async Task DatabaseReady()
+    {
+        bool ready = await database.DatabaseReady();
         while (!ready && !initComplete)
         {
             await Task.Delay(5);
 
         }
+    }
+    private bool TryHighScore(PlaceData _newData)
+    {
         for (int i = 0; i < 3; i++)
         {
             if (_newData.placePoints > places[i].placePoints)
@@ -62,17 +59,20 @@ public class LeaderboardData
                     places[j] = temp;
                     temp = temp2;
                 }
-                break;
+                return true;
             }
         }
-        
-        firebaseDatabase.UpdateOnce("loading", true);
-        firebaseDatabase.UpdateOnce(1, places[0].placePoints);
-        firebaseDatabase.UpdateOnce(2, places[1].placePoints);
-        firebaseDatabase.UpdateOnce(3, places[2].placePoints);
-        firebaseDatabase.UpdateOnce("loading", false);
+        return false;
     }
-
+    //DUNNO : Wait for writing data, then setting status to false? Need it?
+    private void ServerWrite()
+    {
+        database.SetStatus(true);
+        database.UpdateObject(1, places[0].placePoints);
+        database.UpdateObject(2, places[1].placePoints);
+        database.UpdateObject(3, places[2].placePoints);
+        database.SetStatus(false);
+    }
 
     public void TryInsertData(PlaceData _newData)
     {

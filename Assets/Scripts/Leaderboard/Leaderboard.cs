@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Firebase.Database;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,7 +7,7 @@ public class Leaderboard : MonoBehaviour
 {
     public static Leaderboard main;
     private LeaderboardData data;
-    public FirebaseConnect firebaseDatabase;
+    public Database Database;
     public bool InitComplete
     {
         get
@@ -35,14 +36,9 @@ public class Leaderboard : MonoBehaviour
     {
         if(data == null)
         {
-            data = new LeaderboardData(firebaseDatabase);
+            data = new LeaderboardData(Database);
             data.UpdateData();
         }
-    }
-
-    public void UpdateData()
-    {
-        data.UpdateData();
     }
 
     public void TryInsert(PlaceData _newData)

@@ -5,24 +5,67 @@ using UnityEngine.UI;
 
 public class LeaderboardMainMenu : MonoBehaviour
 {
-
-    public List<Text> texts;
+    public List<GameObject> columns;
+    public GameObject LeaderBoardOverLay;
+    public float Offset = 0.01f;
+    public float MinSpeed = 0.4f;
 
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(EStart());
+        StartCoroutine(InitChart());
     }
 
-    IEnumerator EStart()
+    IEnumerator InitChart()
     {
-        while (!Leaderboard.main.InitComplete)
+        if (Application.internetReachability == NetworkReachability.NotReachable)
         {
-            yield return new WaitForFixedUpdate();
+            SetPanelActive(false);
         }
+        else
+        {
+            SetPanelActive(true);
+            while (!Leaderboard.main.InitComplete)
+            {
+                yield return new WaitForFixedUpdate();
+            }
+
+            int highScore = Leaderboard.main.ReadData(0).placePoints;
+            for (int i = 0; i < 3; i++)
+            {
+                int localScore = Leaderboard.main.ReadData(i).placePoints;
+                columns[i].transform.GetChild(1).GetComponent<Text>().text = localScore.ToString();
+                float scale = (float)localScore / (float)highScore;
+                StartCoroutine(ShowColumn(columns[i].transform.GetChild(0), scale));
+            }
+        }
+    }
+
+    public void OnClickReconnectButton()
+    {
+        StartCoroutine(InitChart());
+    }
+
+    private void SetPanelActive(bool _value)
+    {
+        LeaderBoardOverLay.SetActive(!_value);
         for (int i = 0; i < 3; i++)
         {
-            texts[i].text = Leaderboard.main.ReadData(i).placePoints.ToString();
+            columns[i].SetActive(_value);
         }
+    }
+
+    IEnumerator ShowColumn(Transform column, float scale)
+    {
+
+        float i = 0.0f;
+        float rate = 0.05f / scale;
+        while (i < 1.0)
+        {
+            i += Time.deltaTime * rate;
+            column.localScale = new Vector3(1f, Mathf.Lerp(column.localScale.y, scale, i), 1f);
+            yield return new WaitForEndOfFrame();
+        }
+        
     }
 }

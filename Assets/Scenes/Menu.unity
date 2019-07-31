@@ -807,6 +807,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 598006493}
+  - component: {fileID: 598006494}
   m_Layer: 5
   m_Name: ColumnPosition1
   m_TagString: Untagged
@@ -835,6 +836,20 @@ RectTransform:
   m_AnchoredPosition: {x: 3.2000122, y: 2}
   m_SizeDelta: {x: 100, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &598006494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 598006492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec5489caafb16be42a28a0e41dd11518, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  column: {fileID: 13530451}
+  columnText: {fileID: 664884296}
 --- !u!1 &664884294
 GameObject:
   m_ObjectHideFlags: 0
@@ -1193,6 +1208,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1144758815}
+  - component: {fileID: 1144758816}
   m_Layer: 5
   m_Name: ColumnPosition2
   m_TagString: Untagged
@@ -1221,6 +1237,20 @@ RectTransform:
   m_AnchoredPosition: {x: -126.8, y: 2}
   m_SizeDelta: {x: 100, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1144758816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1144758814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec5489caafb16be42a28a0e41dd11518, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  column: {fileID: 291529847}
+  columnText: {fileID: 1489942679}
 --- !u!1 &1286062600
 GameObject:
   m_ObjectHideFlags: 0
@@ -1293,9 +1323,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   columns:
-  - {fileID: 598006492}
-  - {fileID: 1144758814}
-  - {fileID: 1658385787}
+  - {fileID: 598006494}
+  - {fileID: 1144758816}
+  - {fileID: 1658385789}
   LeaderBoardOverLay: {fileID: 764993326}
   Offset: 0.01
   MinSpeed: 0.4
@@ -1516,6 +1546,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1658385788}
+  - component: {fileID: 1658385789}
   m_Layer: 5
   m_Name: ColumnPosition3
   m_TagString: Untagged
@@ -1544,6 +1575,20 @@ RectTransform:
   m_AnchoredPosition: {x: 143.20001, y: 2}
   m_SizeDelta: {x: 100, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1658385789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1658385787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec5489caafb16be42a28a0e41dd11518, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  column: {fileID: 2056438234}
+  columnText: {fileID: 1077218587}
 --- !u!1 &1774376397
 GameObject:
   m_ObjectHideFlags: 0

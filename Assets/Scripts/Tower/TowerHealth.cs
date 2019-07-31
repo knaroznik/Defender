@@ -7,10 +7,13 @@ public class TowerHealth : MonoBehaviour
     private int health = 100;
     private TowerUI uiHandler;
     public GameObject floatingText;
+    public ObjectPool objectPool;
     public Transform canvas;
 
     private void Start()
     {
+        objectPool.AddPrototype(floatingText);
+        objectPool.AddParentObject(this.gameObject);
         uiHandler = GetComponent<TowerUI>();
     }
 
@@ -40,15 +43,12 @@ public class TowerHealth : MonoBehaviour
 
     public void ShowDamage(int _value)
     {
-        GameObject instance = Instantiate(floatingText);
+        GameObject instance = objectPool.acquireReusable(floatingText);
         instance.transform.SetParent(canvas, false);
         instance.transform.SetAsFirstSibling();
         instance.GetComponent<FloatingText>().Start();
         instance.GetComponent<FloatingText>().SetText(_value.ToString());
-
-        Vector2 screenPosition = Camera.main.WorldToScreenPoint(this.transform.position);
-        instance.transform.position = screenPosition;
-
+        instance.GetComponent<FloatingText>().SetPosition(this.transform.position);
     }
 
     public bool Alive()

@@ -7,6 +7,7 @@ public class Tower : MonoBehaviour
 {
     public Transform spawnPoint;
     public GameObject bulletPrefab;
+    public ObjectPool objectPool;
 
     private float reloadTime = 0.4f;
     private float currentReloadTime = 0;
@@ -15,6 +16,12 @@ public class Tower : MonoBehaviour
 
     //MOVE TO ANOTHER CLASS
     public List<Text> texts;
+
+    private void Start()
+    {
+        objectPool.AddParentObject(this.gameObject);
+        objectPool.AddPrototype(bulletPrefab);
+    }
 
     // Update is called once per frame
     void Update()
@@ -63,8 +70,10 @@ public class Tower : MonoBehaviour
     {
         if (Input.GetMouseButton(0) && currentReloadTime <= 0)
         {
-            GameObject x = Instantiate(bulletPrefab, spawnPoint.position, spawnPoint.rotation);
-            x.GetComponent<Bullet>().bulletType = bulletType;
+            GameObject bullet = objectPool.acquireReusable(bulletPrefab);
+            bullet.transform.position = spawnPoint.position;
+            bullet.transform.rotation = spawnPoint.rotation;
+            bullet.GetComponent<Bullet>().SetType(bulletType);
             currentReloadTime = reloadTime;
         }
         else

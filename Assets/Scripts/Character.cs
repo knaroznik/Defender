@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Character : MonoBehaviour
+public class Character : ObjectPoolAble
 {
     public Path path;
     public int Damage;
@@ -16,6 +16,7 @@ public class Character : MonoBehaviour
     public ObjectType characterType;
 
     private int currentPointID = 0;
+    private bool Alive;
 
 
     private void Start()
@@ -26,6 +27,7 @@ public class Character : MonoBehaviour
 
     public void SetUp(Path _path, int _damage, int _points, float _addSpeed)
     {
+        Alive = true;
         path = _path;
         Damage = _damage;
         Points = _points;
@@ -35,6 +37,10 @@ public class Character : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!Alive)
+        {
+            return;
+        }
         float distance = Vector3.Distance(path.GetPosition(currentPointID), transform.position);
         transform.position = Vector3.MoveTowards(transform.position, path.GetPosition(currentPointID), Time.deltaTime * (movementSpeed + addspeed));
 
@@ -50,8 +56,15 @@ public class Character : MonoBehaviour
         if(currentPointID >= path.Length())
         {
             path.playerHealth.Damage(Damage);
-            Destroy(this.gameObject);
+            Destroy();
         }
+    }
+
+    protected override void ResetObject()
+    {
+        currentPointID = 0;
+        Alive = false;
+        base.ResetObject();
     }
 
     public void Die()

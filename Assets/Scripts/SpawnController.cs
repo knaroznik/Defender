@@ -7,6 +7,8 @@ public class SpawnController : MonoBehaviour
     public List<GameObject> prefabs;
     public List<Spawner> spawners;
     private float nextSpawnTime;
+    public ObjectPool objectPool;
+    public GameObject ObjectPoolParent;
 
     int characterSpawned = 0;
     int characterDamage = 1;
@@ -16,6 +18,12 @@ public class SpawnController : MonoBehaviour
 
     private void Start()
     {
+        for(int i=0; i<prefabs.Count; i++)
+        {
+            objectPool.AddPrototype(prefabs[i]);
+        }
+        objectPool.AddParentObject(ObjectPoolParent);
+
         nextSpawnTime = Random.Range(0, 4);
         LoadingScreen.main.ChangeColorInstantly(Color.black);
         StartCoroutine(ClearScreen());
@@ -53,7 +61,7 @@ public class SpawnController : MonoBehaviour
     {
         GameObject randomPrefab = prefabs[Random.Range(0, prefabs.Count)];
         Spawner randomSpawner = spawners[Random.Range(0, spawners.Count)];
-        randomSpawner.Spawn(randomPrefab, characterDamage, characterPoints);
+        randomSpawner.Spawn(randomPrefab, characterDamage, characterPoints, objectPool);
         
     }
 }

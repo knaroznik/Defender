@@ -2,20 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class Bullet : ObjectPoolAble
 {
     public float speed;
-    public BulletBase bulletType;
-
-    private void Start()
-    {
-        this.gameObject.GetComponent<Renderer>().material.color = bulletType.GetColor();
-    }
+    private BulletBase bulletType;
 
     // Update is called once per frame
     void Update()
     {
         this.transform.position = Vector3.MoveTowards(this.transform.position, this.transform.position + this.transform.forward, Time.deltaTime * speed);
+    }
+
+    public void SetType(BulletBase _type)
+    {
+        bulletType = _type;
+        this.gameObject.GetComponent<Renderer>().material.color = bulletType.GetColor();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -26,14 +27,19 @@ public class Bullet : MonoBehaviour
             if(t == bulletType.GetBulletType())
             {
                 other.GetComponent<Character>().Die();
-                Destroy(other.gameObject);
+                other.GetComponent<ObjectPoolAble>().Destroy();
             }
-            Destroy(this.gameObject);
+            Destroy();
         }
+    }
+
+    protected override void ResetObject()
+    {
+        base.ResetObject();
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        Destroy(this.gameObject);
+        Destroy();
     }
 }

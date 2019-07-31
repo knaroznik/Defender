@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class LeaderboardMainMenu : MonoBehaviour
 {
-    public List<GameObject> columns;
+    public List<ChartColumn> columns;
     public GameObject LeaderBoardOverLay;
     public float Offset = 0.01f;
     public float MinSpeed = 0.4f;
@@ -34,9 +34,9 @@ public class LeaderboardMainMenu : MonoBehaviour
             for (int i = 0; i < 3; i++)
             {
                 int localScore = Leaderboard.main.ReadData(i).placePoints;
-                columns[i].transform.GetChild(1).GetComponent<Text>().text = localScore.ToString();
+                columns[i].columnText.text = localScore.ToString();
                 float scale = (float)localScore / (float)highScore;
-                StartCoroutine(ShowColumn(columns[i].transform.GetChild(0), scale));
+                StartCoroutine(ShowColumn(columns[i].column.transform, scale));
             }
         }
     }
@@ -51,7 +51,7 @@ public class LeaderboardMainMenu : MonoBehaviour
         LeaderBoardOverLay.SetActive(!_value);
         for (int i = 0; i < 3; i++)
         {
-            columns[i].SetActive(_value);
+            columns[i].gameObject.SetActive(_value);
         }
     }
 

@@ -5,6 +5,7 @@ using UnityEngine;
 public class TowerPoints : MonoBehaviour
 {
     private TowerUI uiHandler;
+    public List<PowerUp> powerUps;
 
     private void Start()
     {
@@ -17,5 +18,28 @@ public class TowerPoints : MonoBehaviour
     {
         points += _value;
         uiHandler.UpdatePoints(points);
+    }
+
+    public void AddPowerUp()
+    {
+        int randomPowerUp = Random.Range(0, powerUps.Count);
+        //show powerUp on TowerUI
+        //powerUps[randomPowerUp].powerUpScript.Read(powerUps[randomPowerUp].powerUpDescription);
+        StartCoroutine(powerUps[randomPowerUp].powerUpScript.Action(GetComponent<Tower>()));
+    }
+
+    private IEnumerable EightBullets()
+    {
+        yield return null;
+    }
+
+    private IEnumerable UniversalBullet()
+    {
+        yield return null;
+    }
+
+    private IEnumerable Regeneration()
+    {
+        yield return null;
     }
 }

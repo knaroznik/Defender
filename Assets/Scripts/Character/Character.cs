@@ -17,6 +17,7 @@ public class Character : ObjectPoolAble
 
     private int currentPointID = 0;
     private bool Alive;
+    public BaseCharacterController controller;
 
 
     private void Start()
@@ -25,13 +26,15 @@ public class Character : ObjectPoolAble
         this.transform.position = path.GetPosition(0);
     }
 
-    public void SetUp(Path _path, int _damage, int _points, float _addSpeed)
+    public void SetUp(Path _path, int _damage, int _points, float _addSpeed, BaseCharacterController _controller)
     {
         Alive = true;
         path = _path;
         Damage = _damage;
         Points = _points;
         addspeed = _addSpeed * 2;
+        controller = _controller;
+        controller.SetUp(this.gameObject);
     }
 
     // Update is called once per frame
@@ -69,6 +72,6 @@ public class Character : ObjectPoolAble
 
     public void Die()
     {
-        path.playerPoints.AddPoints(Points);
+        controller.Die(path, Points);
     }
 }

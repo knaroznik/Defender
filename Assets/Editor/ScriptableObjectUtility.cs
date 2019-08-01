@@ -39,4 +39,10 @@ public static class ScriptableObjectUtility
     {
         ScriptableObjectUtility.CreateAsset<ObjectPool>();
     }
+
+    [MenuItem("Assets/Create/PowerUp")]
+    public static void CreatePowerUp()
+    {
+        ScriptableObjectUtility.CreateAsset<PowerUp>();
+    }
 }

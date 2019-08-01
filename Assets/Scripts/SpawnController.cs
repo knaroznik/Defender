@@ -14,6 +14,9 @@ public class SpawnController : MonoBehaviour
     int characterDamage = 1;
     int characterPoints = 1;
 
+    float powerUpCooldown = 5f;
+    float currentpowerUpTime = 5f;
+
     private bool screenFree = false;
 
     private void Start()
@@ -42,7 +45,7 @@ public class SpawnController : MonoBehaviour
 
         if(nextSpawnTime <= 0)
         {
-            RandomSpawn();
+            RandomSpawn(currentpowerUpTime < 0);
             nextSpawnTime = Random.Range(0.4f, 4f);
 
             characterSpawned++;
@@ -54,14 +57,27 @@ public class SpawnController : MonoBehaviour
             }
         }
 
+        currentpowerUpTime -= Time.deltaTime;
+
         nextSpawnTime -= Time.deltaTime;
     }
 
-    private void RandomSpawn()
+    private void RandomSpawn(bool _spawnPowerUp)
     {
         GameObject randomPrefab = prefabs[Random.Range(0, prefabs.Count)];
         Spawner randomSpawner = spawners[Random.Range(0, spawners.Count)];
-        randomSpawner.Spawn(randomPrefab, characterDamage, characterPoints, objectPool);
+        BaseCharacterController c;
+        if (_spawnPowerUp)
+        {
+            c = new PowerCharacterController();
+            currentpowerUpTime = powerUpCooldown;
+        }
+        else
+        {
+            c = new BaseCharacterController();
+        }
+
+        randomSpawner.Spawn(randomPrefab, characterDamage, characterPoints, objectPool, c);
         
     }
 }

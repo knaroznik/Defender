@@ -10,6 +10,8 @@ public class TowerHealth : MonoBehaviour
     public ObjectPool objectPool;
     public Transform canvas;
 
+    public bool Regenerate = false;
+
     private void Start()
     {
         objectPool.AddPrototype(floatingText);
@@ -17,12 +19,18 @@ public class TowerHealth : MonoBehaviour
         uiHandler = GetComponent<TowerUI>();
     }
 
+    //Add regenerate func.
     public void Update()
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
             health = 0;
             Death();
+        }
+
+        if (Regenerate)
+        {
+            Debug.Log("REGEN UP");
         }
     }
 
